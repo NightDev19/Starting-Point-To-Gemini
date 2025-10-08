@@ -74,3 +74,36 @@ Run automated tests with:
 ```
 pytest
 ```
+Tests are located in test_gemini_client.py..
+## GitHub Actions CI
+This project includes a GitHub Actions workflow to:
+- Install dependencies
+- Inject GEMINI_API_KEY from GitHub Secrets
+- Run tests automatically
+Workflow file: .github/workflows/main.yml
+## Secrets Management
+Do not commit your .env file.
+Instead, store secrets securely in GitHub Actions:
+1. Go to your GitHub repository → Settings → Secrets and variables → Actions
+2. Click New repository secret
+3. Add:
+```
+Name: GEMINI_API_KEY
+Value: your_api_key_here
+```
+4. Save the secret.
+In workflow:
+```
+run: echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> $GITHUB_ENV
+```
+## Requirements
+Contents of requirements.txt:
+```
+google-generativeai==0.8.5
+python-dotenv==1.0.0
+pytest==8.4.2
+```
+Install with:
+```
+pip install -r requirements.txt
+```
